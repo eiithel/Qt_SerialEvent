@@ -32,6 +32,7 @@ void SerialPortListener::handleReadyRead()
     m_Data.append(m_serialPort->readAll());
 
     if(!m_Data.isEmpty()){
+        m_standardOutput << QObject::tr("le buffer fait la taille: ") << m_Data.length() << endl;
         emit getData(m_Data);
     }
 

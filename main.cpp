@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
     SerialPortWriter serialPortWriter(&serialPort);
 
     SerialPortListener serialPortListener(&serialPort); //creation du port d'écoute asynchrone
-    Command command(&serialPort);
+    Command command(&serialPortListener, &serialPortWriter);
 
 
 

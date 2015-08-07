@@ -7,13 +7,13 @@
 
 QT_USE_NAMESPACE
 
-Command::Command(QSerialPort *serialPort, QObject *parent)
+Command::Command(SerialPortListener *listener, SerialPortWriter *writer, QObject *parent)
     : QObject(parent)
     ,m_flagHigh(false)
     , m_flagLow(false)
+    , m_listener(listener)
+    , m_writer(writer)
 {
-    m_listener = new SerialPortListener(serialPort);
-    m_writer = new SerialPortWriter(serialPort);
 
     connect(m_listener,SIGNAL(getData(QByteArray)),this,SLOT(analyzeTrame(QByteArray)));
     connect(this,SIGNAL(sendOrdre(QByteArray)),m_writer,SLOT(writeOrder(QByteArray)));
@@ -35,11 +35,18 @@ void Command::ledoff(){
 }
 
 void Command::analyzeTrame(const QByteArray &trame){
+    m_standardOutput << QObject::tr("rentre dans l'analyse") << endl;
+    //on ne rentre jamais dans le slot d'analyse de la trame.
+
     if(trame.contains("HIGH")){
         m_flagHigh = true;
+        m_standardOutput << QObject::tr("valeur flag") << m_flagHigh << endl;
+
         emit sendOrdre("LEDON\n");
     }else if(trame.contains("LOW")){
         m_flagLow = true;
+        m_standardOutput << QObject::tr("valeur flag") << m_flagLow << endl;
+
         emit sendOrdre("LEDOFF\n");
 
     }else{

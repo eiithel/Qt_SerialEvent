@@ -80,7 +80,8 @@ void SerialPortWriter::handleError(QSerialPort::SerialPortError serialPortError)
 
 void SerialPortWriter::writeOrder(const QByteArray &writeOrder){
     m_serialPort->write(writeOrder);
-    m_standardOutput << QObject::tr("ordre envoye") << endl;
+    m_standardOutput << QObject::tr("ordre envoye :") <<  writeOrder <<endl;
+    //il envoit bien un ordre a l'arduino, mais c'est toujours LEDON
 }
 
 

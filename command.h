@@ -15,7 +15,7 @@ class Command : public QObject
     Q_OBJECT
 
 public:
-    Command(QSerialPort *serialPort, QObject *parent = 0);
+    Command(SerialPortListener *listener, SerialPortWriter *writer, QObject *parent = 0);
     ~Command();
     void ledon();//if listen "LEDSTATE = 1" --> m_writer send an order to the arduino
     void ledoff();
@@ -33,6 +33,7 @@ private:
     SerialPortListener *m_listener;
     SerialPortWriter *m_writer;
     QByteArray m_transmitData;
+    QTextStream     m_standardOutput;
     bool m_flagHigh;
     bool m_flagLow;
 };
