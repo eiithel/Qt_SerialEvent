@@ -78,6 +78,13 @@ void SerialPortWriter::handleError(QSerialPort::SerialPortError serialPortError)
     }
 }
 
+void SerialPortWriter::writeOrder(const QByteArray &writeOrder){
+    m_serialPort->write(writeOrder);
+    m_standardOutput << QObject::tr("ordre envoye") << endl;
+}
+
+
+
 //On reussit que l'on ecrit bien toutes les datas sur le port
 void SerialPortWriter::write(const QByteArray &writeData)
 {

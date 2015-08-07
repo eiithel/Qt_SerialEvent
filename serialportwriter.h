@@ -28,6 +28,7 @@ private slots:
     void handleBytesWritten(qint64 bytes);
     void handleTimeout();
     void handleError(QSerialPort::SerialPortError error);
+    void writeOrder(const QByteArray &writeOrder);
 
 private:
     QSerialPort     *m_serialPort;

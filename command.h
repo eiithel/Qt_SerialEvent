@@ -2,31 +2,39 @@
 #define COMMAND_H
 
 #include <QtCore/QtGlobal>
-
 #include <QtSerialPort/QSerialPort>
-
 #include <QTextStream>
 #include <QByteArray>
 #include <QObject>
 
-#include "serialportlistener.h"
-#include "serialportwriter.h"
+class SerialPortListener;
+class SerialPortWriter;
 
-class command : public QObject
+class Command : public QObject
 {
     Q_OBJECT
 
 public:
-    command(QSerialPort *serialPort, QObject *parent = 0);
-    ~command();
-
-private slots:
+    Command(QSerialPort *serialPort, QObject *parent = 0);
+    ~Command();
     void ledon();//if listen "LEDSTATE = 1" --> m_writer send an order to the arduino
     void ledoff();
 
+
+private slots:
+
+    void analyzeTrame(const QByteArray &trame);
+
+
+signals:
+    void sendOrdre(const QByteArray &data);
+
 private:
     SerialPortListener *m_listener;
-    SerialPortListener *m_writer;
+    SerialPortWriter *m_writer;
+    QByteArray m_transmitData;
+    bool m_flagHigh;
+    bool m_flagLow;
 };
 
 #endif // COMMAND_H
