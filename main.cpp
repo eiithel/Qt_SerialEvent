@@ -1,7 +1,7 @@
 
 #include "serialportwriter.h"
 #include "serialportlistener.h"
-#include "command.h"
+#include "serialmanager.h"
 
 #include <QtSerialPort/QSerialPort>
 #include <QTextStream>
@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
     SerialPortWriter serialPortWriter(&serialPort);
 
     SerialPortListener serialPortListener(&serialPort); //creation du port d'écoute asynchrone
-    Command command(&serialPortListener, &serialPortWriter);
+    SerialManager command(&serialPortListener, &serialPortWriter);
 
 
 

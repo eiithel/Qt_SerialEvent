@@ -10,13 +10,13 @@
 class SerialPortListener;
 class SerialPortWriter;
 
-class Command : public QObject
+class SerialManager : public QObject
 {
     Q_OBJECT
 
 public:
-    Command(SerialPortListener *listener, SerialPortWriter *writer, QObject *parent = 0);
-    ~Command();
+    SerialManager(SerialPortListener *listener, SerialPortWriter *writer, QObject *parent = 0);
+    ~SerialManager();
     void ledon();//if listen "LEDSTATE = 1" --> m_writer send an order to the arduino
     void ledoff();
 
