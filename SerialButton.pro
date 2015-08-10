@@ -5,7 +5,8 @@
 #-------------------------------------------------
 
 QT       += core gui\
-            widgets serialport
+            widgets serialport\
+            websockets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -17,11 +18,13 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     serialportwriter.cpp \
     serialportlistener.cpp \
-    serialmanager.cpp
+    serialmanager.cpp \
+    socket.cpp
 
 HEADERS  += mainwindow.h \
     serialportwriter.h \
     serialportlistener.h \
-    serialmanager.h
+    serialmanager.h \
+    socket.h
 
 FORMS    += mainwindow.ui
