@@ -34,8 +34,6 @@ private:
     SerialPortWriter *m_writer;
     QByteArray m_transmitData;
     QTextStream     m_standardOutput;
-    bool m_flagHigh;
-    bool m_flagLow;
 };
 
 #endif // COMMAND_H

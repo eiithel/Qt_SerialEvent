@@ -3,14 +3,13 @@
 #include "serialportlistener.h"
 #include "serialportwriter.h"
 #include <QCoreApplication>
+#include <QDebug>
 
 
 QT_USE_NAMESPACE
 
 Command::Command(SerialPortListener *listener, SerialPortWriter *writer, QObject *parent)
     : QObject(parent)
-    ,m_flagHigh(false)
-    , m_flagLow(false)
     , m_listener(listener)
     , m_writer(writer)
 {
@@ -35,23 +34,25 @@ void Command::ledoff(){
 }
 
 void Command::analyzeTrame(const QByteArray &trame){
-    m_standardOutput << QObject::tr("rentre dans l'analyse") << endl;
-    //on ne rentre jamais dans le slot d'analyse de la trame.
+    QByteArray temp;
+    temp.append(trame);
 
-    if(trame.contains("HIGH")){
-        m_flagHigh = true;
-        m_standardOutput << QObject::tr("valeur flag") << m_flagHigh << endl;
+    qDebug() << "Entree dans l'analyse";
+
+    if(temp.contains("HIGH")){
 
         emit sendOrdre("LEDON\n");
-    }else if(trame.contains("LOW")){
-        m_flagLow = true;
-        m_standardOutput << QObject::tr("valeur flag") << m_flagLow << endl;
+        //vider le buffer
+        temp.remove(0,temp.indexOf("HIGH")); // on efface du début du buffer jusqu'à 1ere occurence de HIGH
+
+    }else if(temp.contains("LOW")){
 
         emit sendOrdre("LEDOFF\n");
+        temp.remove(0,temp.indexOf("LOW")); // on efface du début du buffer jusqu'à 1ere occurence de HIGH
 
     }else{
-        m_flagHigh = false;
-        m_flagLow = false;
+        temp.clear();
+        //vider le buffer
     }
 }
 
