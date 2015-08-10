@@ -4,7 +4,7 @@
 Qt_SerialEvent is A simple application which listens to the serialport in order to pick up a button state and react in consequences. 
 
 The Framework used is `Qt`. 
-Basically we use this libraries:
+Basically we use these libraries:
 *  QtSerialPort
 *  QtWebSockets
 
