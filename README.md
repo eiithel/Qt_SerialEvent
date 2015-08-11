@@ -53,7 +53,7 @@ void loop() {
   }
 
 ```
->There is still a problem even though. Even if datas coming from the arduino are well processed by the application, the processing is stopped avec 20s. Because of :
+>There is still a problem even though. Even if datas coming from the arduino are well processed by the application, the processing is stopped after 20s. This issue comes from:
 
 ###**serialportlistenner.cpp**
 ```cpp
