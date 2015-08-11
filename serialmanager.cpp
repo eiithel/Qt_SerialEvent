@@ -48,19 +48,29 @@ void SerialManager::analyzeTrame(const QByteArray &trame){
     qDebug() << "Entree dans l'analyse";
     qDebug() << temp;
 
-    indexOf_H = temp.indexOf("HIGH");
-    indexOf_L = temp.indexOf("LOW");
+
+    if(temp.contains("HIGH")){
+        indexOf_H = temp.indexOf("HIGH");
+    }else{
+        indexOf_H = 50;
+    }
+
+    if(temp.contains("LOW")){
+        indexOf_L = temp.indexOf("LOW");
+    }else{
+        indexOf_L=50;
+    }
 
 
     if(temp.contains("HIGH") && (indexOf_H < indexOf_L)){
 
-        temp.remove(0,(temp.indexOf("HIGH")+4)); // on efface du début du buffer et le motif HIGH
+        temp.remove(0,(indexOf_H+4)); // on efface du début du buffer et le motif HIGH
 
         emit sendOrdre("LEDON\n");
 
     }else if(temp.contains("LOW") && (indexOf_L < indexOf_H)){
 
-        temp.remove(0,(temp.indexOf("LOW")+3)); // on efface du début du buffer jusqu'à 1ere occurence de LOW
+        temp.remove(0,(indexOf_L+3)); // on efface du début du buffer jusqu'à 1ere occurence de LOW
 
         emit sendOrdre("LEDOFF\n");
 

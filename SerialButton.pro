@@ -18,13 +18,11 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     serialportwriter.cpp \
     serialportlistener.cpp \
-    serialmanager.cpp \
-    socket.cpp
+    serialmanager.cpp
 
 HEADERS  += mainwindow.h \
     serialportwriter.h \
     serialportlistener.h \
-    serialmanager.h \
-    socket.h
+    serialmanager.h
 
 FORMS    += mainwindow.ui

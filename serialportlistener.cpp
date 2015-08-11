@@ -19,7 +19,7 @@ SerialPortListener::SerialPortListener(QSerialPort *serialPort, QObject *parent)
     connect(m_serialPort, SIGNAL(error(QSerialPort::SerialPortError)), SLOT(handleError(QSerialPort::SerialPortError)));
     connect(&m_timer, SIGNAL(timeout()), SLOT(handleTimeout()));
 
-    m_timer.start(5000);// si au bout de 5s pas de reponses --> quit
+    m_timer.start(20000);// si au bout de 5s pas de reponses --> quit
 
 }
 
@@ -47,7 +47,7 @@ void SerialPortListener::handleTimeout()
     if (m_Data.isEmpty()) {
         m_standardOutput << QObject::tr("No data was currently available for reading from port %1").arg(m_serialPort->portName()) << endl;
     } else {
-        m_standardOutput << QObject::tr("Data successfully received from port %1").arg(m_serialPort->portName()) << endl;
+        m_standardOutput << QObject::tr("Sortie de l'application car timeOut").arg(m_serialPort->portName()) << endl;
         m_standardOutput << m_Data << endl;
     }
 
