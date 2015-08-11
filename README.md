@@ -4,9 +4,10 @@
 Qt_SerialEvent is A simple application which listens to the serialport in order to pick up a button state and react in consequences. 
 
 The Framework used is `Qt`. 
-Basically we use these libraries:
-*  QtSerialPort
-*  QtWebSockets
+Basically we use this libraries:
++     `QtSerialPort`
++ `QtWebSockets`
+	+  _(`QNetworkAccessManager` and `QNetworkRequest` classes seem more accurate)_ 
 
 ###**Arduino routine**
 The arduino sends continiously a button state.
@@ -52,5 +53,12 @@ void loop() {
   }
 
 ```
+>There is still a problem even though. Even if datas coming from the arduino are well processed by the application, the processing is stopped avec 20s. Because of :
 
-> Written with [StackEdit](https://stackedit.io/).
+###**serialportlistenner.cpp**
+```cpp
+connect(&m_timer, SIGNAL(timeout()),SLOT(handleTimeout()));
+
+
+m_timer.start(20000);//program stops after 20s
+```
