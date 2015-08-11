@@ -64,4 +64,5 @@ m_timer.start(20000);//program stops after 20s
 ```
 
 ![image2](https://github.com/eiithel/Qt_SerialEvent/blob/master/Images/Qt_pro2.png)
+> Un aperçu du shell
 
