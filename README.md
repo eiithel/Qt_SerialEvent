@@ -4,14 +4,14 @@
 Qt_SerialEvent is A simple application which listens to the serialport in order to pick up a button state and react in consequences. 
 
 The Framework used is `Qt`. 
-Basically we use this libraries:
+Basically we use these libraries:
 +     `QtSerialPort`
 + `QtWebSockets`
 	+  _(`QNetworkAccessManager` and `QNetworkRequest` classes seem more accurate)_ 
 
 ###**Arduino routine**
-The arduino sends continiously a button state.
-The Arrietta analyze the state and orders the Arduino to switch _ON_ or switch _OFF_ the led according to the button state.
+The arduino sends continiously the state of a button.
+The Arrietta analyse the state and orders the Arduino to switch _ON_ or switch _OFF_ the led according to the button's state.
 
 ```C
 int led = 13;
@@ -53,7 +53,7 @@ void loop() {
   }
 
 ```
->There is still a problem even though. Even if datas coming from the arduino are well processed by the application, the processing is stopped after 20s. This issue comes from:
+>There is still a problem even though. Even if datas coming from the Arduino are well processed by the application, the processing is stopped after 20s. This issue comes from:
 
 ###**serialportlistenner.cpp**
 ```cpp
